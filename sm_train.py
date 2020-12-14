@@ -8,7 +8,7 @@ sagemaker_session = sagemaker.Session(boto3.session.Session())
 
 # Put the right role and input data
 role = "arn:aws:iam::294038372338:role/hunkimSagemaker"
-inputs = "s3://sagemaker-us-west-2-294038372338/sagemaker/hunkim-pytorch-mnist"
+inputs = "s3://sagemaker-us-east-1-869082236477/sagemaker/DEMO-pytorch-mnist"
 
 # Make sure the metric_definition and its regex
 # Train_epoch=1.0000;  Train_loss=0.8504;
