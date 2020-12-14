@@ -36,4 +36,4 @@ jobs:
         PR_NUMBER: ${{ github.event.number }} # Only available for pr (no push)
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        python sm_train.py
+        python test.py
