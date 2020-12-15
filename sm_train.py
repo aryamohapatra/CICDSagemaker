@@ -7,7 +7,7 @@ from report import ResultReport
 sagemaker_session = sagemaker.Session(boto3.session.Session())
 
 # Put the right role and input data
-role = "arn:aws:iam::869082236477:user/amohapatra"
+role = "arn:aws:iam::869082236477:role/service-role/AmazonSageMaker-ExecutionRole-20201125T135948"
 inputs = "s3://arymohapci/sagemaker/DEMO-pytorch-mnist"
 
 # Make sure the metric_definition and its regex
