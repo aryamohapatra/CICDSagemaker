@@ -13,7 +13,7 @@ role = "arn:aws:iam::869082236477:role/service-role/AmazonSageMaker-ExecutionRol
 
 trainedmodel = sagemaker.model.Model(
     model_data='s3://sagex-pipeline-data/SagePoc1-335b438-2021-01-06-09-05-31/output/model.tar.gz', 
-    image = '811284229777.dkr.ecr.us-east-1.amazonaws.com/image-classification:latest',
+    image_uri = '811284229777.dkr.ecr.us-east-1.amazonaws.com/image-classification:latest',
     role=role)  # your role here; could be different name
 
 #comment = Comment()
