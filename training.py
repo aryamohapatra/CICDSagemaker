@@ -57,7 +57,7 @@ learning_rate = "0.01"
 
 s3 = boto3.client('s3')
 # create unique job name 
-job_name = "TestingTrain_Model_1" + timestamp
+job_name = "SagePoc1-335b438" + "-" + timestamp
 training_params = \
 {
     # specify the training docker image
