@@ -9,11 +9,8 @@ import json
 
 start = time.time()
 
-role = sys.argv[1]
-bucket = sys.argv[2]
-stack_name = sys.argv[3]
-commit_id = sys.argv[4]
-commit_id = commit_id[0:7]
+role = "arn:aws:iam::869082236477:role/service-role/AmazonSageMaker-ExecutionRole-20201125T135948"
+bucket = "sagex-pipeline-data"
 
 training_image = '811284229777.dkr.ecr.us-east-1.amazonaws.com/image-classification:latest'
 timestamp = time.strftime('%Y-%m-%d-%H-%M-%S', time.gmtime())
@@ -33,11 +30,11 @@ def upload_to_s3(channel, file):
 # caltech-256
 print ("Downloadng Training Data")
 download('http://data.mxnet.io/data/caltech-256/caltech-256-60-train.rec')
-upload_to_s3('train', 'caltech-256-60-train.rec')
+#upload_to_s3('train', 'caltech-256-60-train.rec')
 print ("Finished Downloadng Training Data")
 print ("Downloadng Testing Data")
 download('http://data.mxnet.io/data/caltech-256/caltech-256-60-val.rec')
-upload_to_s3('validation', 'caltech-256-60-val.rec')
+#upload_to_s3('validation', 'caltech-256-60-val.rec')
 print ("Finished Downloadng Testing Data")
 
 print ("Setting Algorithm Settings")
@@ -60,7 +57,7 @@ learning_rate = "0.01"
 
 s3 = boto3.client('s3')
 # create unique job name 
-job_name = stack_name + "-" + commit_id + "-" + timestamp
+job_name = "TestingTrain_Model_1" + timestamp
 training_params = \
 {
     # specify the training docker image
@@ -144,43 +141,6 @@ except:
     print('Training failed with the following error: {}'.format(message))
 
 
-# creating configuration files so we can pass parameters to our sagemaker endpoint cloudformation
-
-config_data_qa = {
-  "Parameters":
-    {
-        "BucketName": bucket,
-        "CommitID": commit_id,
-        "Environment": "qa",
-        "ParentStackName": stack_name,
-        "SageMakerRole": role,
-        "Timestamp": timestamp
-    }
-}
-
-config_data_prod = {
-  "Parameters":
-    {
-        "BucketName": bucket,
-        "CommitID": commit_id,
-        "Environment": "prod",
-        "ParentStackName": stack_name,
-        "SageMakerRole": role,
-        "Timestamp": timestamp
-    }
-}
-
-
-json_config_data_qa = json.dumps(config_data_qa)
-json_config_data_prod = json.dumps(config_data_prod)
-
-f = open( './CloudFormation/configuration_qa.json', 'w' )
-f.write(json_config_data_qa)
-f.close()
-
-f = open( './CloudFormation/configuration_prod.json', 'w' )
-f.write(json_config_data_prod)
-f.close()
 
 end = time.time()
 print(end - start)
