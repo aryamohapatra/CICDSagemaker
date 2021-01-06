@@ -60,6 +60,6 @@ jobs:
         AWS_REGION: 'us-east-1'   # optional: defaults to us-east-1
         AWS_DEFAULT_REGION: 'us-east-1'
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PR_NUMBER: 'jadjhkjdjsdfgjgsyedgdbhshd73676ghsgdusd7'
+        PR_NUMBER: '6f4ae56fe6686f6eaa3694f7945eeef339f3c35f'
       run: |
         python sm_deploy.py
