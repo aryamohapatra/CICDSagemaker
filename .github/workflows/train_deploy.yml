@@ -59,7 +59,6 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: 'us-east-1'   # optional: defaults to us-east-1
         AWS_DEFAULT_REGION: 'us-east-1'
-        PR_NUMBER: ${{ github.event.number }} # Only available for pr (no push)
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         python sm_deploy.py
